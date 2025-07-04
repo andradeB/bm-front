@@ -1,9 +1,7 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard';
-import Boletos from '../pages/Boletos';
-import DashboardLayout from '../layout/DashboardLayout';
-import LoginPage from '../features/auth/pages/LoginPage';
-import { useAppSelector } from '../shared/hooks';
+import { Navigate, Route, Routes } from "react-router-dom";
+import DashboardLayout from "../layout/DashboardLayout";
+import LoginPage from "../features/auth/pages/LoginPage";
+import { useAppSelector } from "../shared/hooks";
 
 export default function AppRoutes() {
   const token = useAppSelector((state) => state.auth.token);
