@@ -1,5 +1,5 @@
-import Sidebar from "../Sidebar";
-import Header from "../Header";
+import Sidebar from "../widgets/Sidebar";
+import Header from "../widgets/Header";
 import type { ReactNode } from "react";
 
 type Props = {

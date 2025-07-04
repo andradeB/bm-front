@@ -1,6 +1,6 @@
 import Section from "./Section";
 import { menu } from "./menu";
-import PartnerSelector from "../PartnerSelector";
+import PartnerSelector from "./PartnerSelector";
 
 const schools = [
   { id: "1", name: "Escola XPTO" },
