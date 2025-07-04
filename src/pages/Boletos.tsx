@@ -4,8 +4,8 @@ export default function Boletos() {
   return (
     <>
       <Button variant="primary">Salvar</Button>
-      <Button variant="outline">Cancelar</Button>
-      <Button variant="ghost">Fechar</Button>
+      <Button variant="secondary">Cancelar</Button>
+      <Button variant="danger">Fechar</Button>
     </>
   );
 }
