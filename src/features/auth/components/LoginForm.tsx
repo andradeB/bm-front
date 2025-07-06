@@ -1,40 +1,53 @@
-import { useState, FormEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../shared/hooks';
-import { loginAsync } from '../slice';
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Input } from "../../../components/ui/Input";
+import { Button } from "../../../components/ui/Button";
 
-export default function LoginForm() {
-  const dispatch = useAppDispatch();
-  const status = useAppSelector((state) => state.auth.status);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+export interface LoginFormProps {
+  onSubmit: (data: { email: string; password: string }) => void;
+}
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    dispatch(loginAsync({ username, password }));
-  };
+export default function LoginForm({ onSubmit }: LoginFormProps) {
+  const formik = useFormik({
+    initialValues: { email: "", password: "" },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Email inválido")
+        .required("Email é obrigatório"),
+      password: Yup.string()
+        .min(6, "Senha muito curta")
+        .required("Senha é obrigatória"),
+    }),
+    onSubmit,
+  });
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        className="border p-2 w-full"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Usuário"
+    <form onSubmit={formik.handleSubmit} className="space-y-4">
+      <Input
+        name="email"
+        type="email"
+        label="E-mail"
+        placeholder="Digite seu e-mail"
+        value={formik.values.email}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={!!formik.errors.email && !!formik.touched.email}
       />
-      <input
-        className="border p-2 w-full"
+
+      <Input
+        name="password"
         type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Senha"
+        label="Senha"
+        placeholder="Digite sua senha"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={!!formik.errors.password && !!formik.touched.password}
       />
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-        disabled={status === 'loading'}
-      >
-        Entrar
-      </button>
+
+      <Button type="submit" disabled={formik.isSubmitting}>
+        {formik.isSubmitting ? "Carregando…" : "Entrar"}
+      </Button>
     </form>
   );
 }

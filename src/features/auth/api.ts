@@ -1,6 +1,6 @@
-import api from '../../shared/api/axios';
+import api from "../../shared/api/axios";
 
-export const login = async (username: string, password: string) => {
-  const response = await api.post('/login', { username, password });
+export const login = async (email: string, password: string) => {
+  const response = await api.post("/login", { email, password });
   return response.data;
 };

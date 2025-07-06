@@ -1,12 +1,40 @@
-import LoginForm from '../components/LoginForm';
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+import { useNavigate } from "react-router-dom";
+import { loginAsync } from "../slice";
+import LoginForm from "../components/LoginForm";
+import { Card } from "../../../components/ui/Card";
+import { Typography } from "../../../components/ui/Typography";
 
 export default function LoginPage() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { token, status, error } = useAppSelector((state) => state.auth);
+
+  // Redireciona ao obter token com sucesso
+  useEffect(() => {
+    if (token) navigate("/dashboard");
+  }, [token, navigate]);
+
+  // Ao submeter o formulário, envia ao redux
+  const handleLogin = (data: { email: string; password: string }) => {
+    dispatch(loginAsync(data));
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded shadow-md w-80">
-        <h1 className="text-lg font-bold mb-4 text-center">Login</h1>
-        <LoginForm />
-      </div>
+      <Card>
+        <div className="mb-6 text-center">
+          <Typography type="heading">Bem-vindo</Typography>
+          <Typography type="caption">Acesse sua conta</Typography>
+        </div>
+
+        <LoginForm onSubmit={handleLogin} />
+
+        {status === "failed" && error && (
+          <Typography type="caption">{error}</Typography>
+        )}
+      </Card>
     </div>
   );
 }

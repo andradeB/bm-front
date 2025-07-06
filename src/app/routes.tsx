@@ -8,15 +8,16 @@ export default function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
       {token ? (
         <Route element={<DashboardLayout />}>
-          <Route path="/" element={<Navigate to="/dashboard" />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/boletos" element={<Boletos />} />
+          <Route path="/" element={<h1>HOME</h1>} />
+          {/*<Route path="/" element={<Navigate to="/dashboard" />} />*/}
+          <Route path="/dashboard" element={<div></div>} />
+          {/*<Route path="/boletos" element={<Boletos />} />*/}
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
       ) : (
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="*" element={<LoginPage />} />
       )}
     </Routes>
   );
