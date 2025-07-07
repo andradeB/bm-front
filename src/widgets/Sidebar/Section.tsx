@@ -19,19 +19,17 @@ export default function Section({
   icon,
 }: SectionProps) {
   return (
-    <div className="mb-6">
-      <div className="text-[0.7rem] uppercase text-gray-400 font-semibold mb-2 tracking-wide px-2">
-        {label}
-      </div>
-      <nav className="space-y-1">
-        {collapsible && icon ? (
-          <CollapsibleItem label={label} icon={icon} items={items} />
-        ) : (
-          items.map((item) => (
-            <Item key={item.to} {...item} icon={item.icon!} />
-          ))
-        )}
-      </nav>
+    <div className="my-2">
+      {/*<div className="text-[0.7rem] uppercase text-gray-400 font-semibold mb-2 tracking-wide px-2">*/}
+      {/*  {label}*/}
+      {/*</div>*/}
+      {/*<nav className="space-y-1">*/}
+      {collapsible && icon ? (
+        <CollapsibleItem label={label} icon={icon} items={items} />
+      ) : (
+        items.map((item) => <Item key={item.to} {...item} icon={item.icon!} />)
+      )}
+      {/*</nav>*/}
     </div>
   );
 }

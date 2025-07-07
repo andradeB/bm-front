@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Input } from "../../../components/ui/Input";
-import { Button } from "../../../components/ui/Button";
+import { Input } from "../../../components/Input.tsx";
+import { Button } from "../../../components/Button.tsx";
 
 export interface LoginFormProps {
   onSubmit: (data: { email: string; password: string }) => void;

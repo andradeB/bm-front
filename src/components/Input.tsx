@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from "react";
-import { Typography } from "./Typography";
+import { Typography } from "./Typography.tsx";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

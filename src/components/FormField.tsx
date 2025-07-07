@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Typography } from "./Typography";
+import { Typography } from "./Typography.tsx";
 
 interface Props {
   label: string;

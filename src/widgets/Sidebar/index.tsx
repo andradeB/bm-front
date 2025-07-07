@@ -1,25 +1,31 @@
-import Section from "./Section";
 import { menu } from "./menu";
-import PartnerSelector from "./PartnerSelector";
-
-const schools = [
-  { id: "1", name: "Escola XPTO" },
-  { id: "2", name: "Escola Alpha" },
-  { id: "3", name: "Escola Beta" },
-];
+import Item from "@widgets/Sidebar/Item";
+import { useAppDispatch } from "@shared/hooks";
+import { logout } from "@features/auth/slice";
+import { Button } from "@components/Button"; // ajuste o caminho se necessário
 
 export default function Sidebar() {
+  const dispatch = useAppDispatch();
+
   return (
     <aside className="bg-white h-screen w-[290px] shadow-md px-6 py-8 flex flex-col justify-between">
       <div>
-        <h1 className="text-xl font-bold text-indigo-600 mb-8">BM-Admin</h1>
+        <h1 className="text-xl font-bold text-indigo-600 mb-20">BM-Admin</h1>
 
-        {menu.map((section) => (
-          <Section key={section.label} {...section} />
-        ))}
+        <div className="my-2">
+          {menu.map((item) => (
+            <Item key={item.to} {...item} icon={item.icon!} />
+          ))}
+        </div>
       </div>
 
-      <PartnerSelector schools={schools} />
+      <Button
+        variant="danger"
+        mode={"outlined"}
+        onClick={() => dispatch(logout())}
+      >
+        Sair
+      </Button>
     </aside>
   );
 }

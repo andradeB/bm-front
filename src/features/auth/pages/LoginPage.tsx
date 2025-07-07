@@ -1,22 +1,20 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
-import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { useNavigate } from "react-router";
 import { loginAsync } from "../slice";
 import LoginForm from "../components/LoginForm";
-import { Card } from "../../../components/ui/Card";
-import { Typography } from "../../../components/ui/Typography";
+import { Card } from "../../../components/Card.tsx";
+import { Typography } from "../../../components/Typography.tsx";
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { token, status, error } = useAppSelector((state) => state.auth);
 
-  // Redireciona ao obter token com sucesso
   useEffect(() => {
     if (token) navigate("/dashboard");
   }, [token, navigate]);
 
-  // Ao submeter o formulário, envia ao redux
   const handleLogin = (data: { email: string; password: string }) => {
     dispatch(loginAsync(data));
   };

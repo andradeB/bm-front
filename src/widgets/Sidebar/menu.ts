@@ -1,40 +1,40 @@
 import {
-  FaUsers,
   FaBuilding,
-  FaFileInvoiceDollar,
   FaCreditCard,
-  FaCogs,
+  FaFileInvoiceDollar,
+  FaUsers,
+  FaUser,
 } from "react-icons/fa";
 
 export const menu = [
   {
-    label: "Cobrança",
-    items: [
-      {
-        label: "Regras de Boletos",
-        to: "/billing-groups",
-        icon: FaFileInvoiceDollar,
-      },
-      { label: "Boletos", to: "/boletos", icon: FaCreditCard },
-    ],
+    label: "Regras de Boletos",
+    to: "/billing-groups",
+    icon: FaFileInvoiceDollar, // documento de regras financeiras
+  },
+  {
+    label: "Boletos",
+    to: "/boletos",
+    icon: FaCreditCard, // pagamento direto
   },
   {
     label: "Clientes",
-    items: [{ label: "Clientes", to: "/customers", icon: FaUsers }],
+    to: "/customers",
+    icon: FaUsers, // pessoas
   },
   {
-    label: "Integrações",
-    items: [
-      { label: "Provedores de Pagamento", to: "/providers", icon: FaBuilding },
-    ],
+    label: "Provedores de Pagamento",
+    to: "/providers",
+    icon: FaBuilding, // instituições ou empresas
   },
   {
-    label: "Administração",
-    collapsible: true,
-    icon: FaCogs,
-    items: [
-      { label: "Usuários do Sistema", to: "/users" },
-      { label: "Logs", to: "/logs" },
-    ],
+    label: "Usuários do Sistema",
+    to: "/users",
+    icon: FaUser, // segurança + usuário
   },
+  // {
+  //   label: "Logs",
+  //   to: "/logs",
+  //   icon: FaScroll, // registros e rastreabilidade
+  // },
 ];

@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "../widgets/Sidebar";
-import Header from "../widgets/Header";
-import { usePageMetadata } from "../shared/hooks/usePageMetadata.ts";
+import { Outlet } from "react-router";
+import Sidebar from "@widgets/Sidebar";
+import Header from "@widgets/Header";
+import { usePageMetadata } from "@shared/hooks/usePageMetadata.ts";
 
 export default function DashboardLayout() {
   const { title, breadcrumb } = usePageMetadata();
@@ -17,11 +17,11 @@ export default function DashboardLayout() {
   return (
     <div className="flex h-screen bg-[#f4f7fe]">
       <Sidebar />
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <div className="p-6">
+      <div className="flex flex-col flex-1">
+        <div className="h-20 px-6 py-4">
           <Header pageTitle={title} breadcrumb={breadcrumb} escola={escola} />
         </div>
-        <main className="flex-1 overflow-y-auto p-6 pt-0">
+        <main className="flex-1 px-6 pb-6 overflow-y-auto">
           <Outlet />
         </main>
       </div>
