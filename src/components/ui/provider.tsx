@@ -22,7 +22,7 @@ export function Provider(props: ColorModeProviderProps) {
   return (
     <ReduxProvider store={store}>
       <ChakraProvider value={defaultSystem}>
-        <ColorModeProvider {...props}>
+        <ColorModeProvider {...props} forcedTheme={"light"}>
           <SessionLoader>{props.children}</SessionLoader>
         </ColorModeProvider>
       </ChakraProvider>
