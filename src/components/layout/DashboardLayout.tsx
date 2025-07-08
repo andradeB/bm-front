@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Flex, Button, Text } from "@chakra-ui/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import { useAppDispatch } from "@/store/hooks";
@@ -32,7 +33,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <Text fontSize="lg" fontWeight="bold" mb="6">
           Boleto Manager
         </Text>
-        {/* future navigation */}
+        <Flex direction="column" gap="2">
+          <Button as={Link} href="/dashboard" variant="ghost" justifyContent="flex-start">
+            Dashboard
+          </Button>
+          <Button as={Link} href="/partners" variant="ghost" justifyContent="flex-start">
+            Partners
+          </Button>
+        </Flex>
       </Box>
       <Flex direction="column" flex="1">
         <Flex

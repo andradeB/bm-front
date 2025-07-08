@@ -7,12 +7,14 @@ import { ColorModeProvider, type ColorModeProviderProps } from "./color-mode";
 import { store } from "@/store";
 import { useAppDispatch } from "@/store/hooks";
 import { hydrateAuth } from "@/features/auth/authSlice";
+import { hydrateApp } from "@/features/app/appSlice";
 
 function SessionLoader({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(hydrateAuth());
+    dispatch(hydrateApp());
   }, [dispatch]);
 
   return <>{children}</>;
