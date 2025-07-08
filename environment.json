@@ -1,0 +1,33 @@
+{
+  "name": "Boleto Manager Admin ",
+  "description ": "Admin panel for managing users, schools, billing groups, and boleto generation. Built with Next.js 15, Redux Toolkit, Chakra UI, and RTK Query. ",
+  "language ": "typescript ",
+  "entry ": "src/app/page.tsx ",
+  "commands ": {
+    "install ": "npm install ",
+    "start ": "npm run dev ",
+    "build ": "npm run build ",
+    "lint ": "npm run lint "
+  },
+  "devDependencies ": [
+    "typescript ",
+    "eslint ",
+    "eslint-config-next ",
+    "@types/react ",
+    "@types/react-dom ",
+    "@types/node "
+  ],
+  "dependencies ": [
+    "next ",
+    "react ",
+    "react-dom ",
+    "@chakra-ui/react ",
+    "@emotion/react ",
+    "@emotion/styled ",
+    "framer-motion ",
+    "@reduxjs/toolkit ",
+    "react-redux ",
+    "react-hook-form ",
+    "yup "
+  ]
+}
