@@ -7,6 +7,8 @@ import {
   VStack,
   Heading,
   Alert,
+  Flex,
+  Text,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -30,7 +32,11 @@ export default function LoginPage() {
   const token = useAppSelector(selectToken);
   const router = useRouter();
 
-  const { register, handleSubmit } = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
 
@@ -53,24 +59,66 @@ export default function LoginPage() {
   };
 
   return (
-    <Box maxW="md" mx="auto" mt="10">
-      <Heading mb="6" textAlign="center">
-        Login
-      </Heading>
-      {error && (
-        <Alert.Root status="error" mb="4">
-          <Alert.Indicator /> Failed to login
-        </Alert.Root>
-      )}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <VStack gap="4">
-          <Input placeholder="Email" type="email" {...register('email')} />
-          <Input placeholder="Password" type="password" {...register('password')} />
-          <Button type="submit" loading={isLoading} colorScheme="blue" w="full">
-            Sign in
-          </Button>
-        </VStack>
-      </form>
-    </Box>
+    <Flex minH="100vh" align="center" justify="center" bg="gray.50">
+      <Box
+        bg="white"
+        p={{ base: 6, md: 8 }}
+        rounded="xl"
+        shadow="lg"
+        w="full"
+        maxW="md"
+      >
+        <Heading size="md" mb="6" textAlign="center">
+          Acesse sua conta
+        </Heading>
+        {error && (
+          <Alert.Root status="error" mb="4">
+            <Alert.Indicator /> Falha ao entrar
+          </Alert.Root>
+        )}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <VStack gap="4">
+            <Box w="full">
+              <Input
+                type="email"
+                placeholder="Email"
+                {...register('email')}
+                borderRadius="lg"
+                h="50px"
+              />
+              {errors.email && (
+                <Text color="red.500" fontSize="sm" mt="1">
+                  {errors.email.message}
+                </Text>
+              )}
+            </Box>
+            <Box w="full">
+              <Input
+                type="password"
+                placeholder="Senha"
+                {...register('password')}
+                borderRadius="lg"
+                h="50px"
+              />
+              {errors.password && (
+                <Text color="red.500" fontSize="sm" mt="1">
+                  {errors.password.message}
+                </Text>
+              )}
+            </Box>
+            <Button
+              type="submit"
+              loading={isLoading}
+              colorScheme="blue"
+              w="full"
+              h="50px"
+              borderRadius="lg"
+            >
+              Entrar
+            </Button>
+          </VStack>
+        </form>
+      </Box>
+    </Flex>
   );
 }
