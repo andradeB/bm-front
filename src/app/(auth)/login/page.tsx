@@ -36,7 +36,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (token) {
-      router.replace('/');
+      router.replace('/dashboard');
     }
   }, [token, router]);
 
@@ -46,7 +46,7 @@ export default function LoginPage() {
       const { token } = res;
       dispatch(setToken(token));
       localStorage.setItem('token', token);
-      router.push('/');
+      router.push('/dashboard');
     } catch (err) {
       console.error(err);
     }
