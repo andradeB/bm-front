@@ -1,7 +1,24 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useAppSelector } from "@/store/hooks";
+import { selectToken } from "@/features/auth/authSlice";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const token = useAppSelector(selectToken);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!token) {
+      router.replace('/login');
+    }
+  }, [token, router]);
+
+  if (!token) return null;
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>

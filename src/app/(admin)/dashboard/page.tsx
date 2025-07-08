@@ -2,11 +2,11 @@
 
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { clearToken } from '@/features/auth/authSlice';
+import { clearToken, selectToken } from '@/features/auth/authSlice';
 import { useRouter } from 'next/navigation';
 
 export default function DashboardPage() {
-  const token = useAppSelector((state) => state.auth.token);
+  const token = useAppSelector(selectToken);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -15,6 +15,8 @@ export default function DashboardPage() {
     localStorage.removeItem('token');
     router.push('/login');
   };
+
+  if (!token) return null;
 
   return (
     <Box maxW="md" mx="auto" mt="10">

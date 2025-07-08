@@ -12,8 +12,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useLoginMutation } from '@/features/auth/authApi';
-import { useAppDispatch } from '@/store/hooks';
-import { setToken } from '@/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { setToken, selectToken } from '@/features/auth/authSlice';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -27,6 +27,7 @@ type FormData = yup.InferType<typeof schema>;
 export default function LoginPage() {
   const [login, { isLoading, error }] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const token = useAppSelector(selectToken);
   const router = useRouter();
 
   const { register, handleSubmit } = useForm<FormData>({
@@ -34,12 +35,10 @@ export default function LoginPage() {
   });
 
   useEffect(() => {
-    const stored = localStorage.getItem('token');
-    if (stored) {
-      dispatch(setToken(stored));
-      router.push('/dashboard');
+    if (token) {
+      router.replace('/');
     }
-  }, [dispatch, router]);
+  }, [token, router]);
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -47,7 +46,7 @@ export default function LoginPage() {
       const { token } = res;
       dispatch(setToken(token));
       localStorage.setItem('token', token);
-      router.push('/dashboard');
+      router.push('/');
     } catch (err) {
       console.error(err);
     }

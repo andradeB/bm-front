@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { AppDispatch, RootState } from '@/store';
 
 export interface AuthState {
   token: string | null;
@@ -22,4 +23,14 @@ const authSlice = createSlice({
 });
 
 export const { setToken, clearToken } = authSlice.actions;
+
+export const selectToken = (state: RootState) => state.auth.token;
+
+export const hydrateAuth = () => (dispatch: AppDispatch) => {
+  const stored = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  if (stored) {
+    dispatch(setToken(stored));
+  }
+};
+
 export default authSlice.reducer;
