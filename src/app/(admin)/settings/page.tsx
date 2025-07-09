@@ -133,7 +133,7 @@ function PartnerSection() {
                   type="button"
                   colorScheme="red"
                   onClick={handleDelete}
-                  isDisabled={!selected}
+                  disabled={!selected}
                 >
                   Remover
                 </Button>
@@ -258,7 +258,7 @@ function ProviderSection() {
                   type="button"
                   colorScheme="red"
                   onClick={handleDelete}
-                  isDisabled={!selected}
+                  disabled={!selected}
                 >
                   Remover
                 </Button>
