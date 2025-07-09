@@ -40,6 +40,15 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <Link asChild color={pathname === "/dashboard" ? "blue.600" : undefined}>
             <NextLink href="/dashboard">Dashboard</NextLink>
           </Link>
+          <Link asChild color={pathname.startsWith("/users") ? "blue.600" : undefined}>
+            <NextLink href="/users">Usuários</NextLink>
+          </Link>
+          <Link asChild color={pathname.startsWith("/customers") ? "blue.600" : undefined}>
+            <NextLink href="/customers">Clientes</NextLink>
+          </Link>
+          <Link asChild color={pathname.startsWith("/billing-groups") ? "blue.600" : undefined}>
+            <NextLink href="/billing-groups">Grupos de Cobrança</NextLink>
+          </Link>
           <Link asChild color={pathname.startsWith("/settings") ? "blue.600" : undefined}>
             <NextLink href="/settings">Configuração</NextLink>
           </Link>
