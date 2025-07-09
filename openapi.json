@@ -55,10 +55,12 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "user@example.com"
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "secret123"
                   }
                 }
               }
@@ -67,7 +69,26 @@
         },
         "responses": {
           "200": {
-            "description": "Login successful"
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "type": "bearer",
+                  "token": "abc123"
+                }
+              }
+            }
           }
         }
       }
@@ -80,7 +101,22 @@
         "summary": "User logout",
         "responses": {
           "200": {
-            "description": "Logout successful"
+            "description": "Logout successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "revoked": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "example": {
+                  "revoked": true
+                }
+              }
+            }
           }
         }
       }
@@ -99,10 +135,12 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "john@example.com"
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "secret123"
                   }
                 }
               }
@@ -111,7 +149,26 @@
         },
         "responses": {
           "201": {
-            "description": "User created successfully"
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "email": "john@example.com"
+                }
+              }
+            }
           }
         }
       }
@@ -124,7 +181,47 @@
         "summary": "Get all billing groups",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "baseAmount": {
+                        "type": "number"
+                      },
+                      "dueDay": {
+                        "type": "number"
+                      },
+                      "finePercent": {
+                        "type": "number"
+                      },
+                      "interestPercentMonth": {
+                        "type": "number"
+                      },
+                      "createdBy": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "id": "1",
+                    "baseAmount": 100,
+                    "dueDay": 10,
+                    "finePercent": 2,
+                    "interestPercentMonth": 1,
+                    "createdBy": "u1"
+                  }
+                ]
+              }
+            }
           }
         }
       },
@@ -140,11 +237,25 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string"
+                  "baseAmount": {
+                    "type": "number",
+                    "example": 100
                   },
-                  "document": {
-                    "type": "string"
+                  "dueDay": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "finePercent": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "interestPercentMonth": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "createdBy": {
+                    "type": "string",
+                    "example": "u1"
                   }
                 }
               }
@@ -153,7 +264,42 @@
         },
         "responses": {
           "201": {
-            "description": "Billing group created successfully"
+            "description": "Billing group created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "baseAmount": {
+                      "type": "number"
+                    },
+                    "dueDay": {
+                      "type": "number"
+                    },
+                    "finePercent": {
+                      "type": "number"
+                    },
+                    "interestPercentMonth": {
+                      "type": "number"
+                    },
+                    "createdBy": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "baseAmount": 100,
+                  "dueDay": 10,
+                  "finePercent": 2,
+                  "interestPercentMonth": 1,
+                  "createdBy": "u1"
+                }
+              }
+            }
           }
         }
       }
@@ -202,11 +348,21 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string"
+                  "baseAmount": {
+                    "type": "number",
+                    "example": 100
                   },
-                  "document": {
-                    "type": "string"
+                  "dueDay": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "finePercent": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "interestPercentMonth": {
+                    "type": "number",
+                    "example": 1
                   }
                 }
               }
@@ -215,7 +371,42 @@
         },
         "responses": {
           "200": {
-            "description": "Billing group updated successfully"
+            "description": "Billing group updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "baseAmount": {
+                      "type": "number"
+                    },
+                    "dueDay": {
+                      "type": "number"
+                    },
+                    "finePercent": {
+                      "type": "number"
+                    },
+                    "interestPercentMonth": {
+                      "type": "number"
+                    },
+                    "createdBy": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "baseAmount": 100,
+                  "dueDay": 10,
+                  "finePercent": 2,
+                  "interestPercentMonth": 1,
+                  "createdBy": "u1"
+                }
+              }
+            }
           }
         }
       },
@@ -236,7 +427,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Billing group deleted successfully"
+            "description": "Billing group deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deleted": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "example": {
+                  "deleted": true
+                }
+              }
+            }
           }
         }
       }
@@ -249,7 +455,44 @@
         "summary": "Get all boletos",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "customer_id": {
+                        "type": "string"
+                      },
+                      "billing_group_id": {
+                        "type": "string"
+                      },
+                      "due_date": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "id": "1",
+                    "customer_id": "c1",
+                    "billing_group_id": "b1",
+                    "due_date": "2024-01-01T00:00:00.000Z",
+                    "status": "pending"
+                  }
+                ]
+              }
+            }
           }
         }
       }
@@ -285,7 +528,39 @@
         "summary": "Get all customers",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "document": {
+                        "type": "string"
+                      },
+                      "billingGroupId": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "id": "1",
+                    "name": "Customer A",
+                    "document": "123",
+                    "billingGroupId": "bg1"
+                  }
+                ]
+              }
+            }
           }
         }
       },
@@ -302,10 +577,16 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Customer A"
                   },
                   "document": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "123"
+                  },
+                  "billingGroupId": {
+                    "type": "string",
+                    "example": "bg1"
                   }
                 }
               }
@@ -314,7 +595,34 @@
         },
         "responses": {
           "201": {
-            "description": "Customer created successfully"
+            "description": "Customer created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "document": {
+                      "type": "string"
+                    },
+                    "billingGroupId": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "name": "Customer A",
+                  "document": "123",
+                  "billingGroupId": "bg1"
+                }
+              }
+            }
           }
         }
       }
@@ -364,10 +672,12 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Customer A"
                   },
                   "document": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "123"
                   }
                 }
               }
@@ -376,7 +686,34 @@
         },
         "responses": {
           "200": {
-            "description": "Customer updated successfully"
+            "description": "Customer updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "document": {
+                      "type": "string"
+                    },
+                    "billingGroupId": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "name": "Customer A",
+                  "document": "123",
+                  "billingGroupId": "bg1"
+                }
+              }
+            }
           }
         }
       },
@@ -397,7 +734,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Customer deleted successfully"
+            "description": "Customer deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deleted": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "example": {
+                  "deleted": true
+                }
+              }
+            }
           }
         }
       }
@@ -410,7 +762,35 @@
         "summary": "Get all partners",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "createdBy": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "id": "1",
+                    "name": "Partner A",
+                    "createdBy": "u1"
+                  }
+                ]
+              }
+            }
           }
         }
       },
@@ -427,10 +807,8 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
-                  },
-                  "document": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Partner A"
                   }
                 }
               }
@@ -439,7 +817,30 @@
         },
         "responses": {
           "201": {
-            "description": "Partner created successfully"
+            "description": "Partner created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "createdBy": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "name": "Partner A",
+                  "createdBy": "u1"
+                }
+              }
+            }
           }
         }
       }
@@ -489,10 +890,8 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
-                  },
-                  "document": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Partner A"
                   }
                 }
               }
@@ -501,7 +900,30 @@
         },
         "responses": {
           "200": {
-            "description": "Partner updated successfully"
+            "description": "Partner updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "createdBy": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "name": "Partner A",
+                  "createdBy": "u1"
+                }
+              }
+            }
           }
         }
       },
@@ -522,7 +944,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Partner deleted successfully"
+            "description": "Partner deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deleted": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "example": {
+                  "deleted": true
+                }
+              }
+            }
           }
         }
       }
@@ -535,7 +972,35 @@
         "summary": "Get all providers",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "id": "1",
+                    "code": "P1",
+                    "name": "Provider A"
+                  }
+                ]
+              }
+            }
           }
         }
       },
@@ -551,11 +1016,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string"
+                  "code": {
+                    "type": "string",
+                    "example": "P1"
                   },
-                  "document": {
-                    "type": "string"
+                  "name": {
+                    "type": "string",
+                    "example": "Provider A"
                   }
                 }
               }
@@ -564,7 +1031,30 @@
         },
         "responses": {
           "201": {
-            "description": "Provider created successfully"
+            "description": "Provider created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "code": "P1",
+                  "name": "Provider A"
+                }
+              }
+            }
           }
         }
       }
@@ -613,11 +1103,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string"
+                  "code": {
+                    "type": "string",
+                    "example": "P1"
                   },
-                  "document": {
-                    "type": "string"
+                  "name": {
+                    "type": "string",
+                    "example": "Provider A"
                   }
                 }
               }
@@ -626,7 +1118,30 @@
         },
         "responses": {
           "200": {
-            "description": "Provider updated successfully"
+            "description": "Provider updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "code": "P1",
+                  "name": "Provider A"
+                }
+              }
+            }
           }
         }
       },
@@ -647,7 +1162,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Provider deleted successfully"
+            "description": "Provider deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deleted": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "example": {
+                  "deleted": true
+                }
+              }
+            }
           }
         }
       }
@@ -660,7 +1190,31 @@
         "summary": "Get all users",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "id": "1",
+                    "email": "john@example.com"
+                  }
+                ]
+              }
+            }
           }
         }
       },
@@ -676,11 +1230,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string"
+                  "email": {
+                    "type": "string",
+                    "example": "john@example.com"
                   },
-                  "document": {
-                    "type": "string"
+                  "password": {
+                    "type": "string",
+                    "example": "secret123"
                   }
                 }
               }
@@ -689,7 +1245,26 @@
         },
         "responses": {
           "201": {
-            "description": "User created successfully"
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "email": "john@example.com"
+                }
+              }
+            }
           }
         }
       }
@@ -712,7 +1287,26 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "email": "john@example.com"
+                }
+              }
+            }
           }
         }
       },
@@ -738,11 +1332,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string"
+                  "email": {
+                    "type": "string",
+                    "example": "john@example.com"
                   },
-                  "document": {
-                    "type": "string"
+                  "password": {
+                    "type": "string",
+                    "example": "secret123"
                   }
                 }
               }
@@ -751,7 +1347,26 @@
         },
         "responses": {
           "200": {
-            "description": "User updated successfully"
+            "description": "User updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "1",
+                  "email": "john@example.com"
+                }
+              }
+            }
           }
         }
       },
@@ -772,7 +1387,22 @@
         ],
         "responses": {
           "200": {
-            "description": "User deleted successfully"
+            "description": "User deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deleted": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "example": {
+                  "deleted": true
+                }
+              }
+            }
           }
         }
       }
