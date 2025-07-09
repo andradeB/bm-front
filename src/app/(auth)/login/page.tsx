@@ -15,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useLoginMutation } from '@/features/auth/authApi';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setToken, selectToken } from '@/features/auth/authSlice';
+import { setToken, setPartnerId, selectToken } from '@/features/auth/authSlice';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -51,7 +51,9 @@ export default function LoginPage() {
       const res = await login(data).unwrap();
       const { token } = res;
       dispatch(setToken(token));
+      dispatch(setPartnerId('1'));
       localStorage.setItem('token', token);
+      localStorage.setItem('partnerId', '1');
       router.push('/dashboard');
     } catch (err) {
       console.error(err);
