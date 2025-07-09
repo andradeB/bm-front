@@ -1,10 +1,11 @@
 "use client";
 
-import { Box, Flex, Button, Text } from "@chakra-ui/react";
+import { Box, Flex, Button, Text, VStack, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import { useAppDispatch } from "@/store/hooks";
-import { clearToken } from "@/features/auth/authSlice";
+import { clearToken, setPartnerId } from "@/features/auth/authSlice";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -16,7 +17,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const handleLogout = () => {
     dispatch(clearToken());
+    dispatch(setPartnerId(null));
     localStorage.removeItem("token");
+    localStorage.removeItem("partnerId");
     router.push("/login");
   };
 
@@ -32,7 +35,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <Text fontSize="lg" fontWeight="bold" mb="6">
           Boleto Manager
         </Text>
-        {/* future navigation */}
+        <VStack align="start" spacing="4">
+          <Link as={NextLink} href="/dashboard">Dashboard</Link>
+          <Link as={NextLink} href="/users">Usuários</Link>
+          <Link as={NextLink} href="/customers">Clientes</Link>
+          <Link as={NextLink} href="/billing-groups">Grupos de Cobrança</Link>
+        </VStack>
       </Box>
       <Flex direction="column" flex="1">
         <Flex
