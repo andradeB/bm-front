@@ -9,7 +9,7 @@ export default function NewUserPage() {
   const router = useRouter();
 
   const handleSubmit = async (data: UserFormData) => {
-    await createUser(data).unwrap();
+    await createUser({ email: data.email, password: data.password ?? '' }).unwrap();
     router.push('/users');
   };
 

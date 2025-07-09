@@ -26,11 +26,14 @@ export default function CustomersPage() {
         onSearch={() => {}}
       />
       <DataTable
-        data={data.slice((page - 1) * pageSize, page * pageSize)}
+        data={data
+          .slice((page - 1) * pageSize, page * pageSize)
+          .map((c) => c as unknown as Record<string, string>)}
         options={[
-          { key: 'name', label: 'Nome' },
-          { key: 'document', label: 'Documento' },
+          { key: 'name', columName: 'Nome' },
+          { key: 'document', columName: 'Documento' },
         ]}
+        keyExtractor={(c) => c.id}
         onRowClick={(id) => router.push(`/customers/${id}`)}
         onDelete={async (id) => {
           await deleteCustomer(id);

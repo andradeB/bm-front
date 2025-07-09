@@ -26,11 +26,14 @@ export default function BillingGroupsPage() {
         onSearch={() => {}}
       />
       <DataTable
-        data={data.slice((page - 1) * pageSize, page * pageSize)}
+        data={data
+          .slice((page - 1) * pageSize, page * pageSize)
+          .map((g) => g as unknown as Record<string, string>)}
         options={[
-          { key: 'baseAmount', label: 'Valor' },
-          { key: 'dueDay', label: 'Vencimento' },
+          { key: 'baseAmount', columName: 'Valor' },
+          { key: 'dueDay', columName: 'Vencimento' },
         ]}
+        keyExtractor={(g) => g.id}
         onRowClick={(id) => router.push(`/billing-groups/${id}`)}
         onDelete={async (id) => {
           await deleteGroup(id);

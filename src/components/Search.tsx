@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Input, Select, Button, Flex } from '@chakra-ui/react';
+import { Input, Button, Flex, NativeSelect } from '@chakra-ui/react';
 
 export interface SearchOption {
   key: string;
@@ -33,13 +33,19 @@ export default function Search({ options, defaultKey, onSearch }: SearchProps) {
   return (
     <form onSubmit={handleSubmit}>
       <Flex gap="2">
-        <Select value={key} onChange={(e) => setKey(e.target.value)} w="auto">
-          {options.map((o) => (
-            <option key={o.key} value={o.key}>
-              {o.label}
-            </option>
-          ))}
-        </Select>
+        <NativeSelect.Root>
+          <NativeSelect.Field
+            value={key}
+            onChange={(e) => setKey(e.target.value)}
+            w="auto"
+          >
+            {options.map((o) => (
+              <option key={o.key} value={o.key}>
+                {o.label}
+              </option>
+            ))}
+          </NativeSelect.Field>
+        </NativeSelect.Root>
         <Input
           value={term}
           onChange={(e) => setTerm(e.target.value)}

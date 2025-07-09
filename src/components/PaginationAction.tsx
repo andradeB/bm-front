@@ -19,10 +19,12 @@ export default function PaginationAction({
       onPageChange={(d) => onPageChange(d.page)}
       count={totalCount}
       pageSize={pageSize}
-      showPageJump
     >
       <Pagination.PrevTrigger />
-      <Pagination.Items />
+      <Pagination.Items
+        render={(page) => <Pagination.Item {...page} />}
+        ellipsis={<Pagination.Ellipsis index={0} />}
+      />
       <Pagination.NextTrigger />
       <Pagination.PageText ml="2" />
     </Pagination.Root>

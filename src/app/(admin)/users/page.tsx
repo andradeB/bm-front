@@ -27,8 +27,11 @@ export default function UsersPage() {
         onSearch={() => {}}
       />
       <DataTable
-        data={data.slice((page - 1) * pageSize, page * pageSize)}
-        options={[{ key: 'email', label: 'Email' }]}
+        data={data
+          .slice((page - 1) * pageSize, page * pageSize)
+          .map((u) => u as unknown as Record<string, string>)}
+        options={[{ key: 'email', columName: 'Email' }]}
+        keyExtractor={(u) => u.id}
         onRowClick={(id) => router.push(`/users/${id}`)}
         onDelete={async (id) => {
           await deleteUser(id);
